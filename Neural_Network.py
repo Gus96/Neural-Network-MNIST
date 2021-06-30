@@ -8,3 +8,10 @@ def open_picture_customization():#открывает картинку, пере�
     tens_pic = ToTensor()(img)
     img = tens_pic.view(1, 784)
     return img
+
+def prediction (img):
+    with torch.no_grad():
+        logps = model(img)
+    ps = torch.exp(logps)
+    probab = list(ps.numpy()[0])
+    print("Predicted Digit =", probab.index(max(probab)))
